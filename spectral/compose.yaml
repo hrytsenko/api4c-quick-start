@@ -1,0 +1,7 @@
+services:
+  spectral:
+    image: stoplight/spectral:6
+    command: 'lint --ruleset /tmp/.spectral.yaml /tmp/books.v1.yaml'
+    volumes:
+      - ../.spectral.yaml:/tmp/.spectral.yaml:ro
+      - ../books.v1.yaml:/tmp/books.v1.yaml:ro

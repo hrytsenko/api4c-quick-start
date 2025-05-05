@@ -1,0 +1,7 @@
+services:
+  oasdiff:
+    image: tufin/oasdiff:stable
+    command: 'changelog /tmp/books.v1.yaml /tmp/books.v1r1.yaml'
+    volumes:
+      - ../books.v1.yaml:/tmp/books.v1.yaml:ro
+      - ../books.v1r1.yaml:/tmp/books.v1r1.yaml:ro

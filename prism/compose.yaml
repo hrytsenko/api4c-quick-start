@@ -1,0 +1,8 @@
+services:
+  prism:
+    image: stoplight/prism:4
+    command: 'proxy -h 0.0.0.0 /tmp/books.v1.yaml http://host.docker.internal:3020/v1/'
+    volumes:
+      - ../books.v1.yaml:/tmp/books.v1.yaml:ro
+    ports:
+      - '4020:4010'

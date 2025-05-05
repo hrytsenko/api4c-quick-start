@@ -1,0 +1,15 @@
+services:
+  apicurio:
+    image: apicurio/apicurio-registry
+    environment:
+      QUARKUS_HTTP_CORS_ORIGINS: '*'
+    ports:
+      - '5020:8080'
+  apicurio-ui:
+    image: apicurio/apicurio-registry-ui
+    environment:
+      REGISTRY_API_URL: http://localhost:5020/apis/registry/v3
+    ports:
+      - '5030:8080'
+    depends_on:
+      - apicurio

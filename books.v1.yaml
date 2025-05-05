@@ -1,0 +1,180 @@
+openapi: 3.0.4
+info:
+  version: '1.0'
+  title: Books
+  description: Manages books records.
+  contact:
+    name: Anton Hrytsenko
+tags:
+  - name: Books
+servers:
+  - url: http://localhost:3020/v1/
+    description: Local
+security:
+  - bearerAuth: []
+paths:
+  /books:
+    get:
+      operationId: findBooks
+      summary: Find books
+      description: Searches over books records.
+      tags:
+        - Books
+      parameters:
+        - in: query
+          name: tags
+          description: A list of tags to filter by.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Search was completed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  books:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Book'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      operationId: addBook
+      summary: Add book
+      description: Adds a new book record.
+      tags:
+        - Books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: Book was created.
+          headers:
+            Location:
+              schema:
+                type: string
+              description: Link to a new book.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  /books/{bookId}:
+    parameters:
+      - $ref: '#/components/parameters/bookIdParam'
+    put:
+      operationId: updateBook
+      summary: Update book
+      description: Updates an existing book record.
+      tags:
+        - Books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '204':
+          description: Book was updated.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      operationId: deleteBook
+      summary: Delete book
+      description: Deletes an existing book record.
+      tags:
+        - Books
+      responses:
+        '204':
+          description: Book was deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+
+  parameters:
+    bookIdParam:
+      in: path
+      name: bookId
+      description: Book identifier.
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    Book:
+      description: Book record.
+      type: object
+      properties:
+        book:
+          type: object
+          properties:
+            id:
+              type: string
+              readOnly: true
+            isbn:
+              type: string
+            title:
+              type: string
+            authors:
+              type: array
+              items:
+                type: string
+            publisher:
+              type: string
+            published:
+              type: string
+            format:
+              type: string
+            pages:
+              type: integer
+            tags:
+              type: array
+              items:
+                type: string
+          required:
+            - id
+            - isbn
+            - title
+    Error:
+      description: Generic error.
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnexpectedError:
+      description: Server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

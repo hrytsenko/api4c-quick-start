@@ -1,0 +1,15 @@
+rules:
+  201-response-post-requests:
+    description: 201 response is mandatory for POST.
+    given: $.paths[*][post].responses
+    severity: error
+    then:
+      field: '201'
+      function: truthy
+  location-header-for-post-requests:
+    description: Location header is mandatory for POST.
+    given: $.paths[*][post].responses['201']
+    severity: error
+    then:
+      field: headers.Location
+      function: truthy
