@@ -1,4 +1,9 @@
+# Mockoon
 @baseUrl = http://localhost:3020/v1
+# Prism
+# @baseUrl = http://localhost:4020
+
+###
 
 # Find all books
 GET {{baseUrl}}/books
