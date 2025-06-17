@@ -1,0 +1,107 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "API4C: Run spectral",
+            "type": "shell",
+            "command": "docker-compose run --rm spectral",
+            "options": {
+                "cwd": "spectral"
+            },
+            "presentation": {
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "API4C: Run oasdiff",
+            "type": "shell",
+            "command": "docker-compose run --rm oasdiff",
+            "options": {
+                "cwd": "oasdiff"
+            },
+            "presentation": {
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "API4C: Start mockoon",
+            "type": "shell",
+            "command": "docker-compose up -d",
+            "options": {
+                "cwd": "mockoon"
+            },
+            "presentation": {
+                "panel": "new",
+                "close": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "API4C: Stop mockoon",
+            "type": "shell",
+            "command": "docker-compose down",
+            "options": {
+                "cwd": "mockoon"
+            },
+            "presentation": {
+                "panel": "new",
+                "close": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "API4C: Start prism",
+            "type": "shell",
+            "command": "docker-compose up -d",
+            "options": {
+                "cwd": "prism"
+            },
+            "presentation": {
+                "panel": "new",
+                "close": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "API4C: Stop prism",
+            "type": "shell",
+            "command": "docker-compose down",
+            "options": {
+                "cwd": "prism"
+            },
+            "presentation": {
+                "panel": "new",
+                "close": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "API4C: Start apicurio",
+            "type": "shell",
+            "command": "docker-compose up -d",
+            "options": {
+                "cwd": "apicurio"
+            },
+            "presentation": {
+                "panel": "new",
+                "close": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "API4C: Stop apicurio",
+            "type": "shell",
+            "command": "docker-compose down",
+            "options": {
+                "cwd": "apicurio"
+            },
+            "presentation": {
+                "panel": "new",
+                "close": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
