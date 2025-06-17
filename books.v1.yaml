@@ -2,14 +2,16 @@ openapi: 3.0.4
 info:
   version: '1.0'
   title: Books
-  description: Manages books records.
+  description: Manage books in the library.
   contact:
     name: Anton Hrytsenko
 tags:
   - name: Books
 servers:
   - url: http://localhost:3020/v1/
-    description: Local
+    description: Mockoon
+  - url: http://localhost:4020
+    description: Prism
 security:
   - bearerAuth: []
 paths:
@@ -17,7 +19,7 @@ paths:
     get:
       operationId: findBooks
       summary: Find books
-      description: Searches over books records.
+      description: Search books in the library.
       tags:
         - Books
       parameters:
@@ -47,7 +49,7 @@ paths:
     post:
       operationId: addBook
       summary: Add book
-      description: Adds a new book record.
+      description: Add a new book to the library.
       tags:
         - Books
       requestBody:
@@ -74,7 +76,7 @@ paths:
     put:
       operationId: updateBook
       summary: Update book
-      description: Updates an existing book record.
+      description: Update an existing book in the library.
       tags:
         - Books
       requestBody:
@@ -92,7 +94,7 @@ paths:
     delete:
       operationId: deleteBook
       summary: Delete book
-      description: Deletes an existing book record.
+      description: Delete an existing book from the library.
       tags:
         - Books
       responses:
@@ -113,14 +115,14 @@ components:
     bookIdParam:
       in: path
       name: bookId
-      description: Book identifier.
+      description: An internal book identifier.
       required: true
       schema:
         type: string
 
   schemas:
     Book:
-      description: Book record.
+      description: A regular book.
       type: object
       properties:
         book:
@@ -154,7 +156,7 @@ components:
             - isbn
             - title
     Error:
-      description: Generic error.
+      description: A generic error.
       type: object
       properties:
         code:

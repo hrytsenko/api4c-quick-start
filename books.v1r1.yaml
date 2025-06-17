@@ -1,15 +1,17 @@
 openapi: 3.0.4
 info:
-  version: "1.1"
+  version: '1.1'
   title: Books
-  description: Manages books records.
+  description: Manage books in the library.
   contact:
     name: Anton Hrytsenko
 tags:
   - name: Books
 servers:
   - url: http://localhost:3020/v1/
-    description: Local
+    description: Mockoon
+  - url: http://localhost:4020
+    description: Prism
 security:
   - bearerAuth: []
 paths:
@@ -17,24 +19,24 @@ paths:
     get:
       operationId: findBooks
       summary: Find books
-      description: Searches over books records.
+      description: Search existing books in the library.
       tags:
         - Books
       parameters:
         - in: query
           name: tags
-          description: Tags to filter by.
+          description: A list of tags to filter by.
           schema:
             type: array
             items:
               type: string
         - in: query
           name: isbn
-          description: ISBN to search by.
+          description: A book ISBN to search by.
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Search was completed.
           content:
             application/json:
@@ -44,69 +46,69 @@ paths:
                   books:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Book"
-        "400":
-          $ref: "#/components/responses/BadRequest"
+                      $ref: '#/components/schemas/Book'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: '#/components/responses/UnexpectedError'
     post:
       operationId: addBook
       summary: Add book
-      description: Adds a new book record.
+      description: Add a new book to the library.
       tags:
         - Books
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Book"
+              $ref: '#/components/schemas/Book'
       responses:
-        "201":
+        '201':
           description: Book was created.
           headers:
             Location:
               schema:
                 type: string
               description: Link to a new book.
-        "400":
-          $ref: "#/components/responses/BadRequest"
+        '400':
+          $ref: '#/components/responses/BadRequest'
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: '#/components/responses/UnexpectedError'
 
   /books/{bookId}:
     parameters:
-      - $ref: "#/components/parameters/bookIdParam"
+      - $ref: '#/components/parameters/bookIdParam'
     put:
       operationId: updateBook
       summary: Update book
-      description: Updates an existing book record.
+      description: Update an existing book in the library.
       tags:
         - Books
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Book"
+              $ref: '#/components/schemas/Book'
       responses:
-        "204":
+        '204':
           description: Book was updated.
-        "400":
-          $ref: "#/components/responses/BadRequest"
+        '400':
+          $ref: '#/components/responses/BadRequest'
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: '#/components/responses/UnexpectedError'
     delete:
       operationId: deleteBook
       summary: Delete book
-      description: Deletes an existing book record.
+      description: Delete an existing book from the library.
       tags:
         - Books
       responses:
-        "204":
+        '204':
           description: Book was deleted.
-        "400":
-          $ref: "#/components/responses/BadRequest"
+        '400':
+          $ref: '#/components/responses/BadRequest'
         default:
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: '#/components/responses/UnexpectedError'
 
 components:
   securitySchemes:
@@ -118,14 +120,14 @@ components:
     bookIdParam:
       in: path
       name: bookId
-      description: Book identifier.
+      description: An internal book identifier.
       required: true
       schema:
         type: string
 
   schemas:
     Book:
-      description: Book record.
+      description: A regular book.
       type: object
       properties:
         book:
@@ -159,7 +161,7 @@ components:
             - isbn
             - title
     Error:
-      description: Generic error.
+      description: A generic error.
       type: object
       properties:
         code:
@@ -176,10 +178,10 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: '#/components/schemas/Error'
     UnexpectedError:
       description: Server error.
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: '#/components/schemas/Error'
