@@ -3,14 +3,10 @@
 # Prism
 # @baseUrl = http://localhost:4020
 
-###
-
-# Find all books
+### Find all books
 GET {{baseUrl}}/books
 Authorization: Bearer TOKEN
 
-###
-
-# Find books by tag
+### Find books by tag
 GET {{baseUrl}}/books?tags=API
 Authorization: Bearer TOKEN
