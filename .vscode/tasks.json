@@ -2,6 +2,18 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "API4C: Run tests",
+            "type": "shell",
+            "command": "docker run --rm -t -v ${PWD}:/workdir jetbrains/intellij-http-client -D books.http",
+            "options": {
+                "cwd": "."
+            },
+            "presentation": {
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "API4C: Run spectral",
             "type": "shell",
             "command": "docker compose run --rm spectral",
