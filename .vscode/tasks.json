@@ -4,7 +4,7 @@
         {
             "label": "API4C: Run spectral",
             "type": "shell",
-            "command": "docker-compose run --rm spectral",
+            "command": "docker compose run --rm spectral",
             "options": {
                 "cwd": "spectral"
             },
@@ -16,7 +16,7 @@
         {
             "label": "API4C: Run oasdiff",
             "type": "shell",
-            "command": "docker-compose run --rm oasdiff",
+            "command": "docker compose run --rm oasdiff",
             "options": {
                 "cwd": "oasdiff"
             },
@@ -28,7 +28,7 @@
         {
             "label": "API4C: Start mockoon",
             "type": "shell",
-            "command": "docker-compose up -d",
+            "command": "docker compose up -d",
             "options": {
                 "cwd": "mockoon"
             },
@@ -41,7 +41,7 @@
         {
             "label": "API4C: Stop mockoon",
             "type": "shell",
-            "command": "docker-compose down",
+            "command": "docker compose down",
             "options": {
                 "cwd": "mockoon"
             },
@@ -54,7 +54,7 @@
         {
             "label": "API4C: Start prism",
             "type": "shell",
-            "command": "docker-compose up -d",
+            "command": "docker compose up -d",
             "options": {
                 "cwd": "prism"
             },
@@ -67,7 +67,7 @@
         {
             "label": "API4C: Stop prism",
             "type": "shell",
-            "command": "docker-compose down",
+            "command": "docker compose down",
             "options": {
                 "cwd": "prism"
             },
@@ -80,7 +80,7 @@
         {
             "label": "API4C: Start apicurio",
             "type": "shell",
-            "command": "docker-compose up -d",
+            "command": "docker compose up -d",
             "options": {
                 "cwd": "apicurio"
             },
@@ -93,7 +93,7 @@
         {
             "label": "API4C: Stop apicurio",
             "type": "shell",
-            "command": "docker-compose down",
+            "command": "docker compose down",
             "options": {
                 "cwd": "apicurio"
             },
