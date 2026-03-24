@@ -1,8 +1,0 @@
-services:
-  mockoon:
-    image: mockoon/cli:latest
-    command: '--data /tmp/books.v1.json --port 3000'
-    volumes:
-      - ./books.v1.json:/tmp/books.v1.json:ro
-    ports:
-      - '3020:3000'

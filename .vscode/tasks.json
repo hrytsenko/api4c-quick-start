@@ -5,9 +5,6 @@
             "label": "API4C: Run spectral",
             "type": "shell",
             "command": "docker compose run --rm spectral",
-            "options": {
-                "cwd": "spectral"
-            },
             "presentation": {
                 "panel": "new"
             },
@@ -17,9 +14,6 @@
             "label": "API4C: Run oasdiff",
             "type": "shell",
             "command": "docker compose run --rm oasdiff",
-            "options": {
-                "cwd": "oasdiff"
-            },
             "presentation": {
                 "panel": "new"
             },
@@ -28,10 +22,7 @@
         {
             "label": "API4C: Start mockoon",
             "type": "shell",
-            "command": "docker compose up -d",
-            "options": {
-                "cwd": "mockoon"
-            },
+            "command": "docker compose --profile mockoon up -d",
             "presentation": {
                 "panel": "new",
                 "close": true
@@ -42,9 +33,6 @@
             "label": "API4C: Test mockoon",
             "type": "shell",
             "command": "docker run --rm -t -v ${PWD}:/workdir -e baseUrl=http://localhost:3020/v1 jetbrains/intellij-http-client -D books.http",
-            "options": {
-                "cwd": "."
-            },
             "presentation": {
                 "panel": "new"
             },
@@ -53,10 +41,7 @@
         {
             "label": "API4C: Stop mockoon",
             "type": "shell",
-            "command": "docker compose down",
-            "options": {
-                "cwd": "mockoon"
-            },
+            "command": "docker compose --profile mockoon down",
             "presentation": {
                 "panel": "new",
                 "close": true
@@ -66,10 +51,7 @@
         {
             "label": "API4C: Start prism",
             "type": "shell",
-            "command": "docker compose up -d",
-            "options": {
-                "cwd": "prism"
-            },
+            "command": "docker compose up -d prism",
             "presentation": {
                 "panel": "new",
                 "close": true
@@ -80,9 +62,6 @@
             "label": "API4C: Test prism",
             "type": "shell",
             "command": "docker run --rm -t -v ${PWD}:/workdir -e baseUrl=http://localhost:4020 jetbrains/intellij-http-client -D books.http",
-            "options": {
-                "cwd": "."
-            },
             "presentation": {
                 "panel": "new"
             },
@@ -91,10 +70,7 @@
         {
             "label": "API4C: Stop prism",
             "type": "shell",
-            "command": "docker compose down",
-            "options": {
-                "cwd": "prism"
-            },
+            "command": "docker compose down prism",
             "presentation": {
                 "panel": "new",
                 "close": true
@@ -104,10 +80,7 @@
         {
             "label": "API4C: Start apicurio",
             "type": "shell",
-            "command": "docker compose up -d",
-            "options": {
-                "cwd": "apicurio"
-            },
+            "command": "docker compose --profile apicurio up -d",
             "presentation": {
                 "panel": "new",
                 "close": true
@@ -117,10 +90,7 @@
         {
             "label": "API4C: Stop apicurio",
             "type": "shell",
-            "command": "docker compose down",
-            "options": {
-                "cwd": "apicurio"
-            },
+            "command": "docker compose --profile apicurio down",
             "presentation": {
                 "panel": "new",
                 "close": true

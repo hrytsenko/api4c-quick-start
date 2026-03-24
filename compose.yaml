@@ -1,0 +1,63 @@
+name: api4c-bootstrap
+
+services:
+  spectral:
+    profiles:
+      - spectral
+    container_name: spectral
+    image: stoplight/spectral:6
+    command: 'lint --ruleset /tmp/.spectral.yaml /tmp/books.v1.yaml'
+    volumes:
+      - ./.spectral.yaml:/tmp/.spectral.yaml:ro
+      - ./books.v1.yaml:/tmp/books.v1.yaml:ro
+  oasdiff:
+    profiles:
+      - oasdiff
+    container_name: oasdiff
+    image: tufin/oasdiff:stable
+    command: 'changelog /tmp/books.v1.yaml /tmp/books.v1r1.yaml'
+    volumes:
+      - ./books.v1.yaml:/tmp/books.v1.yaml:ro
+      - ./books.v1r1.yaml:/tmp/books.v1r1.yaml:ro
+
+  mockoon:
+    profiles:
+      - mockoon
+    container_name: mockoon
+    image: mockoon/cli:latest
+    command: '--data /tmp/mockoon.json --port 3000'
+    volumes:
+      - ./mockoon.json:/tmp/mockoon.json:ro
+    ports:
+      - '3020:3000'
+  prism:
+    profiles:
+      - prism
+    container_name: prism
+    image: stoplight/prism:4
+    command: 'proxy -h 0.0.0.0 /tmp/books.v1.yaml http://host.docker.internal:3020/v1/'
+    volumes:
+      - ./books.v1.yaml:/tmp/books.v1.yaml:ro
+    ports:
+      - '4020:4010'
+
+  apicurio:
+    profiles:
+      - apicurio
+    container_name: apicurio
+    image: apicurio/apicurio-registry
+    environment:
+      QUARKUS_HTTP_CORS_ORIGINS: '*'
+    ports:
+      - '5020:8080'
+  apicurio-ui:
+    profiles:
+      - apicurio
+    container_name: apicurio-ui
+    image: apicurio/apicurio-registry-ui
+    environment:
+      REGISTRY_API_URL: http://localhost:5020/apis/registry/v3
+    ports:
+      - '5030:8080'
+    depends_on:
+      - apicurio
