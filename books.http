@@ -1,7 +1,14 @@
-### Find all books
-GET {{$env.baseUrl}}/books
-Authorization: Bearer TOKEN
-
 ### Find books by tag
 GET {{$env.baseUrl}}/books?tags=API
 Authorization: Bearer TOKEN
+
+> {%
+    client.test("Valid response", function () {
+        client.assert(response.status === 200, "Unexpected status");
+
+        const body = response.body;
+
+        client.assert(body.books && body.books.length > 0, "Unexpected results");
+        client.assert(body.books[0].book.isbn === "9781633438781", "Unexpected ISBN");
+    });
+%}
